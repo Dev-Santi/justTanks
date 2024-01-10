@@ -1,18 +1,47 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody2D tank;
+
+    private void Start()
     {
-        
+        tank = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        GetInputsAndMoveTank();
+    }
+
+    private void GetInputsAndMoveTank()
+    {
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        {
+            tank.velocity = new Vector2Int(2, 0);
+            tank.SetRotation(-90);
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        {
+            tank.velocity = new Vector2Int(-2, 0);
+            tank.SetRotation(90);
+        }
+        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        {
+            tank.velocity = new Vector2Int(0, 2);
+            tank.SetRotation(0);
+        }
+        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        {
+            tank.velocity = new Vector2Int(0, -2);
+            tank.SetRotation(-180);
+        }
+        else
+        {
+            tank.velocity = new Vector2(0, 0);
+        }
     }
 }
